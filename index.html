@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Mikhail Baranov">
+    <title>Менеджеры пакетов в JavaScript</title>
+    <link rel="stylesheet" href="styles/screen.css"/>
+    <style type="text/css">
+        #Cover h2,
+        #Cover a {
+            background: rgba(255,255,255,0.8);
+            padding: 0.2em 0;
+            text-decoration: none;
+            border: none;
+        }
+    </style>
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Менеджеры пакетов в JavaScript</h1>
+</header>
+<section class="slide cover h" id="Cover">
+    <div>
+        <h2>Менеджеры пакетов в JavaScript</h2>
+
+        <p><a href="http://mkhl.brnv.ru">Михаил Баранов</a></p>
+        <img src="img/cover.jpg" alt="">
+        <!-- photo by John Carey, fiftyfootshadows.net -->
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Исходные данные</h2>
+
+        <ul>
+            <li>Проект Repka.com</li>
+            <li>В истории — более 20 разработчиков</li>
+            <li>Около 40 сторонних js-библиотек</li>
+            <li>~20 — jQuery-плагины</li>
+            <li>Бекенд: Composer & Cheff</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Задачи</h2>
+
+        <ul>
+            <li>Знать установленные версии</li>
+            <li>Быстрое обновление и развёртывание</li>
+            <li>Разрешение зависимостей</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Copy & paste</h2>
+
+        <ul>
+            <li>Копать в код</li>
+            <li>Мусор в VCS</li>
+            <li>Зависимости? Какие зависимости?</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Git submodules</h2>
+
+        <p><img src="img/git-submodule.png" alt=""/></p>
+    </div>
+</section>
+<section class="slide cover h">
+    <div>
+        <img src="img/js-managers.png" alt=""/>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>За границей JS</h2>
+
+        <ul>
+            <li>dpkg и прочие линуксы</li>
+            <li>python: pip/pypi</li>
+            <li>ruby gems</li>
+            <li>php composer</li>
+            <li>Sublime packages</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Задачи пакетного менеджера</h2>
+
+        <ul>
+            <li>Организация установленных пакетов</li>
+            <li>Поиск необходимого пакета</li>
+            <li>Загрузка пакета</li>
+            <li>Разрешение зависимостей</li>
+            <li>Обновление установленных пакетов</li>
+            <li>Удаление пакетов и связанных зависимостей</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Пакет (Package)</h2>
+
+        <ul>
+            <li>Код</li>
+            <li>Метаданные
+                <ul>
+                    <li>Название</li>
+                    <li>Версия</li>
+                    <li>Зависимости</li>
+                    <li>Прочее</li>
+                </ul>
+            </li>
+            <li>Индекс в реестре</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Почему npm, bower и volo</h2>
+
+        <ul>
+            <li>Количество пакетов в реестре</li>
+            <li>Возраст и стабильность</li>
+            <li>Независимость от загрузчика</li>
+            <li>Возможность создания приватного реестра</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <!--TODO: Выровнять-->
+    <div>
+        <img src="img/npm-logo.jpg" alt=""/>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>NPM</h2>
+
+        <ul>
+            <li>~ c 20100</li>
+            <li>c 2011 — уставливаеся с Node JS</li>
+            <li>npm --version 1.2.24</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка</h2>
+
+        <img src="img/npm-install.png" alt=""/>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Обновление</h2>
+
+        <pre>
+            <code>$ sudo npm update npm</code>
+        </pre>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <pre>
+            <code>pmList == [ 'npm', 'volo', 'bower', 'component' ]</code>
+            <code>pmList.filter(hasGui) == <mark>[ ]</mark></code>
+            <code> </code>
+            <code>function hasGui(elem) {</code>
+            <code>    return elem.gui === true;</code>
+            <code>}</code>
+        </pre>
+    </div>
+</section>
+<section class="slide shout">
+    <h2>96 команд</h2>
+</section>
+<section class="slide">
+    <div>
+        <h2>96 команд</h2>
+
+        <ul>
+            <li>install</li>
+            <li>isntall</li>
+            <li>update</li>
+            <li>uninstall</li>
+            <li>list</li>
+            <li>publish</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>node_modules</h2>
+
+        <p><strong>No</strong>. This will never happen. This question comes up sometimes, because it seems silly from the outside that
+            npm couldn't just be configured to put stuff somewhere else, and then npm could load them from there.
+            It's an arbitrary spelling choice, right? What's the big deal?</p>
+        <p><a href="https://npmjs.org/doc/faq.html#node_modules-is-the-name-of-my-deity-s-arch-rival-and-a-Forbidden-Word-in-my-religion-Can-I-configure-npm-to-use-a-different-folder">https://npmjs.org/doc/faq.html</a></p>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Настройка окружения</h2>
+
+        <ul>
+            <li>~/.npmrc</li>
+            <li>~/.npmignore</li>
+            <li>~ 80 параметров</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Реестр</h2>
+
+        <ul>
+            <li>https://registry.npmjs.org/</li>
+            <li>31 777 packages</li>
+            <li>Иногда лежит</li>
+            <li>~/.npmrc — registry</li>
+            <li><a href="https://gist.github.com/streunerlein/3331671">лекарство</a></li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Актуальность пакетов</h2>
+
+        <ul>
+            <li>Не всегда</li>
+            <li>Кто первый встал...</li>
+            <li><a href="https://npmjs.org/doc/disputes.html">Диспут</a> решает</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Проект как пакет</h2>
+
+        <ul>
+            <li>package.json</li>
+            <li>Это простой json</li>
+            <li>Это всё-таки json</li>
+        </ul>
+
+        <p><a href="http://package.json.jit.su/">Полная структура</a></p>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <pre><code>{</code>
+            <code>    "name": "{{project}}",</code>
+            <code>    "version": "1.0.0",</code>
+            <code>    "description": "{{description}}",</code>
+            <code>    "repository": "git://github.com/{{author}}/{{project}}.git",</code>
+            <code>    <mark>"dependencies"</mark>: {</code>
+            <code>        "hyperquest": "<mark>~0.1.0</mark>"</code>
+            <code>    },</code>
+            <code>    "devDependencies": {</code>
+            <code>        "mocha": "*"</code>
+            <code>    },</code>
+            <code>}</code>
+        </pre>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <pre>
+            <code>"dependencies" : {</code>
+            <code>    "foo" : "1.0.0 - 2.9999.9999",</code>
+            <code>    "bar" : ">=1.0.2 <2.1.2",</code>
+            <code>    "baz" : ">1.0.2 <=2.3.4",</code>
+            <code>    "boo" : "2.0.1",</code>
+            <code>    "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0",</code>
+            <code>    "asd" : "http://asdf.com/asdf.tar.gz",</code>
+            <code>    "til" : "~1.2",</code>
+            <code>    "elf" : "~1.2.3",</code>
+            <code>    "two" : "2.x",</code>
+            <code>    "thr" : "3.3.x"</code>
+            <code>}</code>
+        </pre>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Если нет в реестре</h2>
+
+        <ul>
+            <li>git://github.com/user/project.git#commit-ish</li>
+            <li>git+ssh://user@hostname:project.git#commit-ish</li>
+            <li>git+ssh://user@hostname/project.git#commit-ish</li>
+            <li>git+http://user@hostname/project/blah.git#commit-ish</li>
+            <li>git+https://user@hostname/project/blah.git#commit-ish</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>volo</h2>
+
+        <ul>
+            <li>~ Январь 2012</li>
+            <li>Последняя версия 0.2.10</li>
+            <li>James Burke — автор RequireJS</li>
+            <li>bootstrapping</li>
+            <li>scaffolding</li>
+            <li>Базируется на поиске по гитхабу</li>
+            <li>Расширение package.json</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка</h2>
+
+        <pre>
+            <code>$ npm install -g volo</code>
+        </pre>
+    </div>
+</section>
+<section class="slide shout">
+    <div>
+        <h2>Ну не на руби же его писать</h2>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Команды</h2>
+
+        <ul>
+            <li>add</li>
+            <li>amdify</li>
+            <li>create</li>
+            <li>info</li>
+            <li>install</li>
+            <li>search</li>
+            <li>
+                <del>remove</del>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка пакета</h2>
+
+        <ul>
+            <li>./js/, ./scripts/, ./</li>
+            <li>volo.{baseDir,baseUrl}, </li>
+            <li>Ставится минимум</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Мета-данные</h2>
+
+        <pre>
+        <code>... // package.json</code>
+        <code>{</code>
+        <code>    "volo": {</code>
+        <code>        "baseUrl": "",</code>
+        <code>        "url": "",</code>
+        <code>        "dependencies": {},</code>
+        <code>        "ignore": []</code>
+        <code>    }</code>
+        <code>}</code>
+        </pre>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Источники</h2>
+
+        <ul>
+            <li>Github search
+            <ul>
+                <li>searchterm</li>
+                <li>searchterm/version</li>
+                <li>user/repo</li>
+                <li>user/repo/tag</li>
+                <li>user/repo/semverVersion</li>
+            </ul>
+            </li>
+            <li>http://some.domain.com/path/to/archive.zip</li>
+            <li>http://some.domain.com/path/to/archive.zip#specific/file.js:</li>
+            <li>symlink:path/to/directory/or/file.js</li>
+            <li>local:path/to/directory</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>volo</h2>
+
+        <ul>
+            <li>Изначально разрабатывался в Twitter</li>
+            <li>Появился в сентябре 2012</li>
+            <li>v.0.9.2</li>
+            <li>Часть Yoman</li>
+            <li>js, css, img</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка</h2>
+
+        <pre>
+            <code>$ npm install -g bower</code>
+        </pre>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка</h2>
+
+        <ul>
+            <li>cache-clean</li>
+            <li>help</li>
+            <li>info</li>
+            <li>init</li>
+            <li>install</li>
+            <li>list, ls</li>
+            <li>lookup</li>
+            <li>register</li>
+            <li>search</li>
+            <li>uninstall</li>
+            <li>update</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Настройка</h2>
+
+        <p>./.bowerrc</p>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка пакетов</h2>
+
+        <ul>
+            <li>В реестре 2346 пакета (компонента)</li>
+            <li>Можно поднять свой реестр</li>
+            <li>Не только из реестра</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Установка пакетов</h2>
+
+        <ul>
+            <li>Клонируется репозиторий</li>
+            <li>потом копируется компонент</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Путь к пакету</h2>
+
+        <ul>
+            <li>Имя из реестра</li>
+            <li>{GH-user}/{repo}</li>
+            <li>git://bitbucket.com/someone/some-package.git</li>
+            <li>Локальный гит-репозиторий</li>
+            <li>Ссылка на .zip|.tar.gz</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>bower.json</h2>
+
+        <pre>
+            <code>{</code>
+            <code>    "name": "my-project",</code>
+            <code>    "version": "1.0.0",</code>
+            <code>    "ignore": [],</code>
+            <code>    "dependencies": {</code>
+            <code>        "&lt;name>": "&lt;version>",</code>
+            <code>        "&lt;name>": "&lt;folder>",</code>
+            <code>        "&lt;name>": "&lt;package>"</code>
+            <code>    },</code>
+            <code>    "devDependencies": {}</code>
+            <code>}</code>
+        </pre>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Тест</h2>
+
+        <ul>
+            <li>backbone + jquery</li>
+            <li>явно — устаревший underscore</li>
+            <li>удаление underscore</li>
+        </ul>
+    </div>
+</section>
+<section class="slide">
+    <div>
+        <h2>Итоги</h2>
+
+        <table border="1">
+        <tr>
+            <th>&nbsp;</th>
+            <th>backbone + jquery</th>
+            <th>явно — устаревший underscore</th>
+            <th>удаление underscore</th>
+        </tr>
+        <tr>
+            <th>node</th>
+            <th>jQ - fail</th>
+            <th>ok</th>
+            <th>+-</th>
+        </tr>
+        <tr>
+            <th>volo</th>
+            <th>ok, jQuery 2.0.2</th>
+            <th>warn</th>
+            <th>-</th>
+        </tr>
+        <tr>
+            <th>bower</th>
+            <th>-, components/backbone</th>
+            <th>warn</th>
+            <th>Ok</th>
+        </tr>
+        </table>
+    </div>
+</section>
+<section class="slide shout">
+    <div>
+        <h2>Серебряной пули — нет</h2>
+    </div>
+</section>
+<script type="text/javascript" src="lib/shower/shower.js"></script>
+</body>
+</html>

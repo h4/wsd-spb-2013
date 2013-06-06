@@ -1,0 +1,6 @@
+[submodule "lib/shower"]
+	path = lib/shower
+	url = git://github.com/shower/shower.git
+[submodule "themes/bright"]
+	path = themes/bright
+	url = git://github.com/shower/bright.git
